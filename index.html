@@ -56,15 +56,14 @@
         /* ================== 首页美化 ================== */
         .hero-section { background: var(--white); padding: 30px 20px; text-align: center; border-radius: 0 0 24px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
         
-        /* 修改后的头像样式 */
         .school-logo { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; }
         .avatar-img { 
             width: 76px; 
             height: 76px; 
-            border-radius: 50%; /* 圆形效果 */
-            object-fit: cover; /* 保证图片等比例裁切不拉伸 */
-            border: 3px solid #e8f0fe; /* 添加一点边框更美观 */
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.15); /* 微妙的立体阴影 */
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 3px solid #e8f0fe; 
+            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.15); 
             background-color: #fff;
         }
 
@@ -103,16 +102,13 @@
         .guide-section li { margin-bottom: 6px; }
         .guide-section .highlight-text { background-color: #fff3e0; color: #d84315; padding: 0 4px; border-radius: 4px; font-weight: bold; }
         
-        /* 攻略通用表格美化 */
         .guide-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 0 0 1px #eee; }
         .guide-table th { background-color: #f0f7ff; color: var(--primary-color); padding: 10px; text-align: left; font-weight: bold; }
         .guide-table td { padding: 10px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; color: #333; line-height: 1.5; }
         .guide-table tr:nth-child(even) { background-color: #fafafa; }
 
-        /* 特殊引言块 */
         .quote-block { border-left: 4px solid var(--primary-color); background: #f8f9fa; padding: 12px 15px; margin: 12px 0; font-size: 13px; color: #666; border-radius: 0 8px 8px 0; }
 
-        /* 底部便签框 */
         .notice-box { background: #fffbe6; border: 1px solid #ffe58f; border-radius: 12px; padding: 16px; margin-top: 20px; box-shadow: 0 2px 8px rgba(250, 173, 20, 0.1); scroll-margin-top: 130px;}
         .notice-box h4 { color: #d46b08; display: flex; align-items: center; gap: 6px; margin-bottom: 12px; font-size: 16px; font-weight: bold;}
         .notice-list { padding-left: 20px; font-size: 13px; color: #5c5c5c; line-height: 1.6; }
@@ -131,7 +127,6 @@
         .modal-copy-btn { background: var(--primary-gradient); color: var(--white); border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; }
         .modal-close { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; color: #fff; font-size: 20px; display: flex; justify-content: center; align-items: center; cursor: pointer; }
 
-        /* 新增：图片放大查看弹窗样式 */
         .image-modal-wrapper { position: relative; max-width: 95vw; max-height: 90vh; display: flex; justify-content: center; align-items: center; }
         .image-modal-wrapper img { max-width: 100%; max-height: 90vh; border-radius: 8px; object-fit: contain; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.2s; }
         .image-modal-close { position: absolute; top: -45px; right: 0; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.5); color: #fff; font-size: 18px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.3); z-index: 10005;}
@@ -148,7 +143,6 @@
         .dir-item::before { content: '📍'; margin-right: 10px; font-size: 14px; }
         .dir-subtitle { padding: 15px 10px 5px; font-size: 12px; color: var(--primary-color); font-weight: bold; background: #fafafa; margin-top: 10px;}
 
-        /* 清单页表格样式 */
         .table-card { background: var(--white); border-radius: 12px; overflow: hidden; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .table-header { padding: 12px 16px; font-weight: bold; font-size: 15px; color: var(--white); display: flex; align-items: center; gap: 8px; }
         .th-red { background: linear-gradient(90deg, #e63946, #f28482); }
@@ -160,8 +154,56 @@
         .sub-tag { font-size: 10px; color: #888; margin-top: 2px; }
         .sub-danger { color: var(--danger); font-weight: bold; }
 
-        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: var(--white); padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 10002; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        /* 重点修改：提高提示框 z-index 确保能在任何弹窗上方显示 */
+        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: var(--white); padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .toast.show { opacity: 1; }
+
+        /* ================== QQ群与频道悬浮按钮组 ================== */
+        .floating-action-group {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* 两个按钮之间的间距 */
+            z-index: 98; 
+        }
+        .floating-btn {
+            background: linear-gradient(135deg, #12B7F5, #0098EA); 
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 30px; 
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(18, 183, 245, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.2s;
+        }
+        .floating-btn:active {
+            transform: scale(0.92);
+        }
+        
+        /* 弹窗内的图片和文字样式公用 */
+        .qq-modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 180px; 
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #eee;
+        }
+        .qq-modal-text {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
@@ -183,6 +225,7 @@
         </div>
     </div>
 
+    <!-- 复制成功的提示框 -->
     <div id="toastMessage" class="toast">复制成功！</div>
 
     <div id="welcomeModal" class="modal-overlay">
@@ -201,7 +244,47 @@
         </div>
     </div>
 
-    <!-- 新增：全屏图片查看弹窗 -->
+    <!-- ================= 新增：右下角悬浮按钮组 ================= -->
+    <div class="floating-action-group">
+        <!-- 上方：QQ群按钮 -->
+        <div class="floating-btn" onclick="openQQGroupModal()">
+            <span style="font-size: 18px;">👥</span> QQ群
+        </div>
+        <!-- 下方：QQ频道按钮 -->
+        <div class="floating-btn" onclick="openQQModal()">
+            <span style="font-size: 18px;">💬</span> QQ频道
+        </div>
+    </div>
+
+    <!-- ================= 新增：QQ群专属弹窗 ================= -->
+    <div id="qqGroupModal" class="modal-overlay hidden" style="z-index: 10003;" onclick="closeQQGroupModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <!-- 替换为你真实的QQ群二维码图片路径 -->
+            <img src="./public/qq_group.jpg" alt="可插入图片" class="qq-modal-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23e8f0fe\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'Arial\' font-size=\'14\' fill=\'%230056b3\' text-anchor=\'middle\' dy=\'.3em\'%3E图片占位区%3C/text%3E%3C/svg%3E'">
+            
+            <div class="qq-modal-text">机电QQ群：1061101980</div>
+            
+            <button class="modal-copy-btn" style="background: linear-gradient(135deg, #12B7F5, #0098EA);" onclick="handleCopy('1061101980')">一键复制群号</button>
+            
+            <div class="modal-close" onclick="closeQQGroupModal()">✕</div>
+        </div>
+    </div>
+
+    <!-- ================= 原有：QQ频道专属弹窗 ================= -->
+    <div id="qqChannelModal" class="modal-overlay hidden" style="z-index: 10003;" onclick="closeQQModal()">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <!-- 替换为你真实的QQ频道二维码图片路径 -->
+            <img src="./public/qq_channel.jpg" alt="可插入图片" class="qq-modal-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23e8f0fe\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'Arial\' font-size=\'14\' fill=\'%230056b3\' text-anchor=\'middle\' dy=\'.3em\'%3E图片占位区%3C/text%3E%3C/svg%3E'">
+            
+            <div class="qq-modal-text">机电QQ频道号：pd41333800</div>
+            
+            <button class="modal-copy-btn" style="background: linear-gradient(135deg, #12B7F5, #0098EA);" onclick="handleCopy('pd41333800')">一键复制频道号</button>
+            
+            <div class="modal-close" onclick="closeQQModal()">✕</div>
+        </div>
+    </div>
+
+    <!-- 全屏图片查看弹窗 -->
     <div id="imageModal" class="modal-overlay hidden" onclick="closeImageModal()" style="z-index: 10004; background: rgba(0,0,0,0.85);">
         <div class="image-modal-wrapper" onclick="event.stopPropagation()">
             <div class="image-modal-close" onclick="closeImageModal()">✕</div>
@@ -247,7 +330,6 @@
 
     <div id="page-home" class="page active">
         <div class="hero-section">
-            <!-- 修改为圆形头像，只需要替换 src 里面的链接即可 -->
             <div class="school-logo">
                 <img src="./public/touxiang.jpg" alt="我的头像" class="avatar-img">
             </div>
@@ -350,7 +432,6 @@
                 <img src="./public/5.jpg" alt="生活区一览" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
                 <p>跟着宿小管一起解锁你的新生活吧~两座学生餐厅分别位于5号公寓楼南侧和9号楼西侧：</p>
                 
-                <!-- 连续4张餐厅/生活插图 -->
                 <img src="./public/6.jpg" alt="餐厅风景1" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
                 <img src="./public/7.jpg" alt="餐厅风景2" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
                 <img src="./public/8.jpg" alt="美食街打卡" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
@@ -466,8 +547,6 @@
                 
                 <div style="text-align:center; margin-top: 30px; padding: 20px; background:#f8f9fa; border-radius:16px;">
                     <p style="font-size:14px; font-weight:bold; color:var(--primary-color);">如果上面还是有不理解、不清楚的话<br>可以加学长微信沟通交流！</p>
-                    
-                    <!-- 替换为你自己圆形的真实头像链接 -->
                     <img src="./public/touxiang.jpg" alt="我的头像" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #e8f0fe; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 15px auto; display: block;">
                 </div>
             </div>
@@ -541,7 +620,6 @@
         <div class="content-box">
             <div style="background: var(--white); padding: 16px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); text-align: center;">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 18px; font-weight: bold;">河南机电职业学院手绘地图</h3>
-                <!-- 修改：添加了 cursor: zoom-in 和 onclick 事件 -->
                 <img src="./public/map.jpg" alt="河南机电职业学院校园地图" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: block; cursor: zoom-in;" onclick="openImageModal(this.src)">
                 <div style="background: #fffbe6; padding: 12px; border-radius: 8px; margin-top: 15px; text-align: left; border: 1px solid #ffe58f;">
                     <p style="font-size: 13px; color: #d46b08; margin: 0; line-height: 1.6;">
@@ -838,7 +916,6 @@
         document.getElementById('welcomeModal').classList.add('hidden');
     }
 
-    /* 新增：图片放大功能逻辑 */
     function openImageModal(imgSrc) {
         const modal = document.getElementById('imageModal');
         const enlargedImg = document.getElementById('enlargedMapImage');
@@ -851,12 +928,37 @@
     }
 
     function handleCopy(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast();
+            }).catch(() => {
+                fallbackCopyText(text);
+            });
+        } else {
+            fallbackCopyText(text);
+        }
+    }
+
+    function fallbackCopyText(text) {
         const tempInput = document.createElement('input');
         tempInput.value = text;
+        tempInput.style.position = 'fixed';
+        tempInput.style.top = '-9999px';
+        tempInput.style.left = '-9999px';
         document.body.appendChild(tempInput);
+        tempInput.focus();
         tempInput.select();
-        tempInput.setSelectionRange(0, 99999);
-        try { document.execCommand('copy'); showToast(); } catch (err) { alert("请长按复制微信号：" + text); }
+        tempInput.setSelectionRange(0, 99999); 
+        try { 
+            const successful = document.execCommand('copy'); 
+            if (successful) {
+                showToast();
+            } else {
+                alert("自动复制失败，请手动长按复制：" + text);
+            }
+        } catch (err) { 
+            alert("自动复制失败，请手动长按复制：" + text); 
+        }
         document.body.removeChild(tempInput);
     }
 
@@ -877,7 +979,6 @@
     }
 
     function scrollToSec(secId) {
-        // 关闭所有目录抽屉
         document.getElementById('directoryDrawer').classList.add('hidden');
         document.getElementById('fullDirectoryDrawer').classList.add('hidden');
         
@@ -891,6 +992,23 @@
                 behavior: "smooth"
             });
         }
+    }
+
+    /* QQ频道与QQ群弹窗控制函数 */
+    function openQQModal() {
+        document.getElementById('qqChannelModal').classList.remove('hidden');
+    }
+
+    function closeQQModal() {
+        document.getElementById('qqChannelModal').classList.add('hidden');
+    }
+
+    function openQQGroupModal() {
+        document.getElementById('qqGroupModal').classList.remove('hidden');
+    }
+
+    function closeQQGroupModal() {
+        document.getElementById('qqGroupModal').classList.add('hidden');
     }
 </script>
 
