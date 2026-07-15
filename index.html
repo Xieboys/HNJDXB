@@ -10,6 +10,7 @@
             --primary-color: #0056b3;
             --primary-gradient: linear-gradient(135deg, #0056b3, #007bff);
             --bg-color: #f2f5f8;
+            --desktop-bg: #e4e9f0; /* PC端页面外围背景色 */
             --text-main: #333333;
             --text-light: #666666;
             --white: #ffffff;
@@ -17,7 +18,7 @@
             --section-bg: #ffffff;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--desktop-bg); color: var(--text-main); line-height: 1.6; }
 
         /* ================== 全局水印样式 ================== */
         .watermark-container {
@@ -31,8 +32,15 @@
             padding: 30px 40px; letter-spacing: 1px;
         }
 
-        /* ================== 核心容器 ================== */
-        #app-container { max-width: 500px; margin: 0 auto; background-color: var(--bg-color); min-height: 100vh; position: relative; overflow-x: hidden; }
+        /* ================== 核心容器 (适配双端的核心) ================== */
+        #app-container { 
+            max-width: 1000px; /* 放大限制，适配PC */
+            margin: 0 auto; 
+            background-color: var(--bg-color); 
+            min-height: 100vh; 
+            position: relative; 
+            box-shadow: 0 0 30px rgba(0,0,0,0.05); /* 桌面端增加阴影带来立体感 */
+        }
         .page { display: none; padding-bottom: 40px; animation: fadeIn 0.3s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -42,6 +50,7 @@
             background: rgba(255, 255, 255, 0.85); backdrop-filter: saturate(180%) blur(16px);
             -webkit-backdrop-filter: saturate(180%) blur(16px); display: flex; justify-content: space-between;
             align-items: center; padding: 10px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
         }
         .top-bar-left { display: flex; align-items: center; gap: 12px; }
         .pulse-icon { font-size: 18px; background: linear-gradient(135deg, #e8f0fe, #d0e0fd); width: 38px; height: 38px; border-radius: 50%; display: flex; justify-content: center; align-items: center; animation: pulseAlert 2s infinite; box-shadow: 0 2px 8px rgba(0, 86, 179, 0.15); }
@@ -54,24 +63,19 @@
         .top-bar-right .copy-btn:active { transform: scale(0.92); box-shadow: 0 2px 6px rgba(252, 96, 118, 0.4); }
 
         /* ================== 首页美化 ================== */
-        .hero-section { background: var(--white); padding: 30px 20px; text-align: center; border-radius: 0 0 24px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .hero-section { background: var(--white); padding: 30px 20px; text-align: center; border-radius: 0 0 24px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; transition: all 0.3s; }
         
         .school-logo { margin-bottom: 12px; display: flex; justify-content: center; align-items: center; }
         .avatar-img { 
-            width: 76px; 
-            height: 76px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 3px solid #e8f0fe; 
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.15); 
-            background-color: #fff;
+            width: 76px; height: 76px; border-radius: 50%; object-fit: cover; 
+            border: 3px solid #e8f0fe; box-shadow: 0 4px 15px rgba(0, 86, 179, 0.15); background-color: #fff;
         }
 
         .school-title { font-size: 24px; font-weight: 800; color: var(--primary-color); letter-spacing: 1px; margin-bottom: 5px; }
         .school-desc { font-size: 13px; color: var(--text-light); background: #e8f0fe; display: inline-block; padding: 4px 12px; border-radius: 20px; }
         
         .menu-container { padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
-        .menu-item { background: var(--white); border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03); cursor: pointer; transition: transform 0.2s; position: relative; z-index: 10;}
+        .menu-item { background: var(--white); border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.03); cursor: pointer; transition: all 0.2s ease; position: relative; z-index: 10;}
         .menu-item:active { transform: scale(0.98); background-color: #fafafa; }
         .menu-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 22px; margin-right: 15px; }
         .menu-text { flex: 1; }
@@ -85,10 +89,10 @@
 
         /* ================== 子页面头部与右上角目录按钮 ================== */
         .nav-header { background: var(--white); padding: 15px 16px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 58px; z-index: 90; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .nav-back { color: var(--primary-color); font-size: 16px; font-weight: 600; display: flex; align-items: center; cursor: pointer; width: 60px; position: relative; z-index: 91;}
+        .nav-back { color: var(--primary-color); font-size: 16px; font-weight: 600; display: flex; align-items: center; cursor: pointer; width: 60px; position: relative; z-index: 91; transition: opacity 0.2s;}
         .nav-back::before { content: "‹"; font-size: 26px; margin-right: 4px; position: relative; top: -1px; }
         .nav-title { flex: 1; text-align: center; font-size: 17px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .nav-menu-btn { color: var(--primary-color); font-size: 14px; font-weight: bold; cursor: pointer; width: 60px; text-align: right; background: #e8f0fe; padding: 4px 8px; border-radius: 12px; position: relative; z-index: 91;}
+        .nav-menu-btn { color: var(--primary-color); font-size: 14px; font-weight: bold; cursor: pointer; width: 60px; text-align: right; background: #e8f0fe; padding: 4px 8px; border-radius: 12px; position: relative; z-index: 91; transition: all 0.2s;}
         .nav-menu-btn:active { background: #d0e0fd; }
 
         /* ================== 攻略长文排版美化 ================== */
@@ -102,6 +106,8 @@
         .guide-section li { margin-bottom: 6px; }
         .guide-section .highlight-text { background-color: #fff3e0; color: #d84315; padding: 0 4px; border-radius: 4px; font-weight: bold; }
         
+        .guide-section img { max-width: 100%; height: auto; max-height: 500px; object-fit: contain; margin: 10px auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block; }
+
         .guide-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; border-radius: 8px; overflow: hidden; box-shadow: 0 0 0 1px #eee; }
         .guide-table th { background-color: #f0f7ff; color: var(--primary-color); padding: 10px; text-align: left; font-weight: bold; }
         .guide-table td { padding: 10px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; color: #333; line-height: 1.5; }
@@ -124,8 +130,8 @@
         .modal-badge { background: #e8f0fe; color: var(--primary-color); font-size: 12px; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 16px; font-weight: bold;}
         .modal-list { text-align: left; list-style: none; font-size: 14px; color: #444; margin-bottom: 20px; }
         .modal-list li { margin-bottom: 10px; display: flex; gap: 8px; }
-        .modal-copy-btn { background: var(--primary-gradient); color: var(--white); border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; }
-        .modal-close { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; color: #fff; font-size: 20px; display: flex; justify-content: center; align-items: center; cursor: pointer; }
+        .modal-copy-btn { background: var(--primary-gradient); color: var(--white); border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; transition: all 0.2s;}
+        .modal-close { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; color: #fff; font-size: 20px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s;}
 
         .image-modal-wrapper { position: relative; max-width: 95vw; max-height: 90vh; display: flex; justify-content: center; align-items: center; }
         .image-modal-wrapper img { max-width: 100%; max-height: 90vh; border-radius: 8px; object-fit: contain; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.2s; -webkit-touch-callout: default; }
@@ -138,23 +144,25 @@
         .drawer-header h3 { font-size: 18px; color: #333; margin: 0; }
         .drawer-close { font-size: 24px; color: #999; cursor: pointer; }
         .dir-list { list-style: none; padding: 0; margin: 0; }
-        .dir-item { padding: 12px 10px; border-bottom: 1px dashed #f0f0f0; font-size: 15px; color: #444; display: flex; align-items: center; cursor: pointer; }
+        .dir-item { padding: 12px 10px; border-bottom: 1px dashed #f0f0f0; font-size: 15px; color: #444; display: flex; align-items: center; cursor: pointer; transition: all 0.2s ease;}
         .dir-item:active { background-color: #f9f9f9; }
         .dir-item::before { content: '📍'; margin-right: 10px; font-size: 14px; }
         .dir-subtitle { padding: 15px 10px 5px; font-size: 12px; color: var(--primary-color); font-weight: bold; background: #fafafa; margin-top: 10px;}
 
+        /* 清单网格 */
         .table-card { background: var(--white); border-radius: 12px; overflow: hidden; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .table-header { padding: 12px 16px; font-weight: bold; font-size: 15px; color: var(--white); display: flex; align-items: center; gap: 8px; }
         .th-red { background: linear-gradient(90deg, #e63946, #f28482); }
         .th-blue { background: linear-gradient(90deg, #1d3557, #457b9d); }
         .th-green { background: linear-gradient(90deg, #2a9d8f, #48bcae); }
         .th-orange { background: linear-gradient(90deg, #e76f51, #f4a261); }
-        .items-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #f0f0f0; }
+        
+        /* 改为自适应网格，电脑上会自动变多列 */
+        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap: 1px; background: #f0f0f0; }
         .grid-item { background: var(--white); padding: 12px 4px; text-align: center; font-size: 13px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 54px;}
         .sub-tag { font-size: 10px; color: #888; margin-top: 2px; }
         .sub-danger { color: var(--danger); font-weight: bold; }
 
-        /* 重点修改：提高提示框 z-index 确保能在任何弹窗上方显示 */
         .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: var(--white); padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 99999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
         .toast.show { opacity: 1; }
 
@@ -165,46 +173,83 @@
             right: 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px; /* 两个按钮之间的间距 */
+            gap: 12px; 
             z-index: 98; 
         }
         .floating-btn {
             background: linear-gradient(135deg, #12B7F5, #0098EA); 
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 30px; 
-            font-weight: bold;
-            font-size: 15px;
-            box-shadow: 0 4px 15px rgba(18, 183, 245, 0.4);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: transform 0.2s;
+            color: var(--white); padding: 10px 20px; border-radius: 30px; font-weight: bold;
+            font-size: 15px; box-shadow: 0 4px 15px rgba(18, 183, 245, 0.4); cursor: pointer;
+            display: flex; align-items: center; gap: 6px; transition: all 0.2s;
         }
-        .floating-btn:active {
-            transform: scale(0.92);
-        }
+        .floating-btn:active { transform: scale(0.92); }
         
-        /* 弹窗内的图片和文字样式公用 */
         .qq-modal-img {
-            width: 100%;
-            height: auto;
-            max-height: 180px; 
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            background-color: #f0f0f0;
-            border: 1px solid #eee;
-            cursor: zoom-in;
-            -webkit-touch-callout: default;
+            width: 100%; height: auto; max-height: 180px; object-fit: cover;
+            border-radius: 12px; margin-bottom: 15px; background-color: #f0f0f0;
+            border: 1px solid #eee; cursor: zoom-in; -webkit-touch-callout: default;
         }
         .qq-modal-text {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
+            font-size: 16px; font-weight: 800; color: var(--text-main);
+            margin-bottom: 20px; letter-spacing: 0.5px;
+        }
+
+        /* ================== PC桌面端响应式优化 (@media >= 768px) ================== */
+        @media (min-width: 768px) {
+            body { background-color: var(--desktop-bg); }
+            
+            .hero-section {
+                margin: 20px; 
+                border-radius: 24px; 
+                padding: 40px 20px;
+            }
+            
+            /* 首页菜单自动两列 */
+            .menu-container {
+                display: grid; 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 20px; 
+                padding: 0 20px;
+            }
+            
+            /* 文章内容限制阅读宽度居中 */
+            .content-box {
+                max-width: 800px; 
+                margin: 0 auto; 
+                padding: 30px 20px;
+            }
+
+            /* 清单格子的间距增大显得更高级 */
+            .items-grid { gap: 2px; }
+            .grid-item { padding: 16px 8px; font-size: 14px; }
+
+            /* 将底部的抽屉在PC端改成居中的悬浮弹窗 */
+            #directoryDrawer, #fullDirectoryDrawer {
+                align-items: center; 
+                justify-content: center;
+            }
+            .drawer-content {
+                border-radius: 24px; 
+                max-height: 80vh; 
+                transform: scale(1) translateY(0); 
+                opacity: 1;
+                transition: transform 0.3s cubic-bezier(0.1, 0.8, 0.2, 1), opacity 0.3s; 
+            }
+            .modal-overlay.hidden .drawer-content { 
+                transform: scale(0.9) translateY(0); 
+                opacity: 0; 
+            }
+        }
+
+        /* ================== PC端悬浮 Hover 动效反馈 ================== */
+        @media (hover: hover) {
+            .menu-item:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+            .floating-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 20px rgba(18, 183, 245, 0.6); }
+            .nav-back:hover, .drawer-close:hover, .modal-close:hover { opacity: 0.7; }
+            .nav-menu-btn:hover { background: #d0e0fd; transform: scale(1.05); }
+            .dir-item:hover { background-color: #f0f7ff; padding-left: 15px; color: var(--primary-color); }
+            .top-bar-right .copy-btn:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(252, 96, 118, 0.5); }
+            .modal-copy-btn:hover { opacity: 0.9; transform: scale(1.02); }
         }
     </style>
 </head>
@@ -246,42 +291,29 @@
         </div>
     </div>
 
-    <!-- ================= 新增：右下角悬浮按钮组 ================= -->
     <div class="floating-action-group">
-        <!-- 上方：QQ群按钮 -->
         <div class="floating-btn" onclick="openQQGroupModal()">
             <span style="font-size: 18px;">👥</span> QQ群
         </div>
-        <!-- 下方：QQ频道按钮 -->
         <div class="floating-btn" onclick="openQQModal()">
             <span style="font-size: 18px;">💬</span> QQ频道
         </div>
     </div>
 
-    <!-- ================= 新增：QQ群专属弹窗 ================= -->
     <div id="qqGroupModal" class="modal-overlay hidden" style="z-index: 10003;" onclick="closeQQGroupModal()">
         <div class="modal-card" onclick="event.stopPropagation()">
-            <!-- 替换为你真实的QQ群二维码图片路径 -->
             <img src="./public/qq_group.jpg" alt="可插入图片" class="qq-modal-img" onclick="openImageModal(this.src)" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23e8f0fe\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'Arial\' font-size=\'14\' fill=\'%230056b3\' text-anchor=\'middle\' dy=\'.3em\'%3E图片占位区%3C/text%3E%3C/svg%3E'">
-            
             <div class="qq-modal-text">机电QQ群：1061101980</div>
-            
             <button class="modal-copy-btn" style="background: linear-gradient(135deg, #12B7F5, #0098EA);" onclick="handleCopy('1061101980')">一键复制群号</button>
-            
             <div class="modal-close" onclick="closeQQGroupModal()">✕</div>
         </div>
     </div>
 
-    <!-- ================= 原有：QQ频道专属弹窗 ================= -->
     <div id="qqChannelModal" class="modal-overlay hidden" style="z-index: 10003;" onclick="closeQQModal()">
         <div class="modal-card" onclick="event.stopPropagation()">
-            <!-- 替换为你真实的QQ频道二维码图片路径 -->
             <img src="./public/qq_channel.jpg" alt="可插入图片" class="qq-modal-img" onclick="openImageModal(this.src)" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23e8f0fe\'/%3E%3Ctext x=\'50\' y=\'50\' font-family=\'Arial\' font-size=\'14\' fill=\'%230056b3\' text-anchor=\'middle\' dy=\'.3em\'%3E图片占位区%3C/text%3E%3C/svg%3E'">
-            
             <div class="qq-modal-text">机电QQ频道号：pd41333800</div>
-            
             <button class="modal-copy-btn" style="background: linear-gradient(135deg, #12B7F5, #0098EA);" onclick="handleCopy('pd41333800')">一键复制频道号</button>
-            
             <div class="modal-close" onclick="closeQQModal()">✕</div>
         </div>
     </div>
@@ -408,20 +440,20 @@
                 <p><strong>安全到校：</strong>按照报到路线到校，无论采用何种出行方式，一定要确保人财物安全~<br>
                 <strong>报到登记：</strong>跟随志愿者来到所在学院迎新报到处，在老师和学长学姐的指引下完成报到登记。<br>
                 <strong>办理住宿：</strong>迎新志愿者与校园摆渡车会帮助你到达自己的公寓楼，在公寓管理老师处完成入住登记并领取宿舍钥匙。</p>
-                <img src="./public/1.jpg" alt="报到流程" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/1.jpg" alt="报到流程">
             </div>
 
             <div class="guide-section" id="sec-2">
                 <h3>02 住宿与生活攻略</h3>
                 
                 <h4>公寓总体布局</h4>
-                <img src="./public/2.jpg" alt="公寓布局" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/2.jpg" alt="公寓布局">
                 <p>校内共有12栋学生公寓楼，整体分布在校园南侧。其中1-3号公寓楼位于校园西南侧、4-9号公寓楼位于南侧中部、10-12号公寓楼位于校园东南侧。新生按学院通知前往所在的公寓楼，你们的公寓管理老师会在公寓楼门前迎接大家。</p>
                 
                 <h4>公寓设施设备</h4>
-                <img src="./public/3.jpg" alt="公寓设施" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/3.jpg" alt="公寓设施">
                 <p>宿舍均设有独立卫生间、生活阳台、洗漱池、晾衣架、无线网络及有线网络接口，配备床铺、桌椅、储物柜、风扇、空调等设备设施。床铺尺寸为2.0*0.9米，大家可参照尺寸准备床铺用品。</p>
-                <img src="./public/4.jpg" alt="床铺设施" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/4.jpg" alt="床铺设施">
                 <p>公寓楼内每层有两个公共卫生间分布在走廊两侧，每层都配备了洗衣机和冷热直饮水机，楼内配备有洗鞋机等设备满足大家日常生活。</p>
                 
                 <div class="notice-box">
@@ -431,20 +463,20 @@
 
                 <h4>生活攻略</h4>
                 <p>公寓与餐厅、健身驿站、生活商超、创业美食街、洗浴中心、大学生心理健康教育中心、医务室、快递站等组成功能齐全的学生生活区。</p>
-                <img src="./public/5.jpg" alt="生活区一览" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/5.jpg" alt="生活区一览">
                 <p>跟着宿小管一起解锁你的新生活吧~两座学生餐厅分别位于5号公寓楼南侧和9号楼西侧：</p>
                 
-                <img src="./public/6.jpg" alt="餐厅风景1" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
-                <img src="./public/7.jpg" alt="餐厅风景2" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
-                <img src="./public/8.jpg" alt="美食街打卡" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
-                <img src="./public/9.jpg" alt="各种小吃" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/6.jpg" alt="餐厅风景1">
+                <img src="./public/7.jpg" alt="餐厅风景2">
+                <img src="./public/8.jpg" alt="美食街打卡">
+                <img src="./public/9.jpg" alt="各种小吃">
                 
                 <p>星座西餐厅和各类生活超市也很值得打卡哦！</p>
-                <img src="./public/10.jpg" alt="超市休闲区" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/10.jpg" alt="超市休闲区">
                 <p>~开学前立的flag这次没有理由不实现！</p>
                 <p>心理健康教育中心和医务室位于4-5号公寓：</p>
-                <img src="./public/11.jpg" alt="医务室1" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
-                <img src="./public/12.jpg" alt="医务室2" style="width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block;">
+                <img src="./public/11.jpg" alt="医务室1">
+                <img src="./public/12.jpg" alt="医务室2">
                 <p>楼连廊洗浴中心位于自强餐厅2楼，内部均为独立淋浴间。此外，生活区设置有快递站，大家可选择将大型行李邮寄至学校（河南省郑州市新郑市龙湖镇泰山路1号河南机电职业学院）。</p>
             </div>
 
